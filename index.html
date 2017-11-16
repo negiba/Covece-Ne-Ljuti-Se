@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <style>
+    
+        .motherBoard>td {
+            min-width: 200px;
+            height: 200px;
+        }
+
+        .childBoard-player {
+            border: none;
+        }
+
+        .childBoard-player td {
+            width: 100px;
+            height: 100px;
+            /* padding: 30px; */
+            border-radius: 100%;
+        }
+
+        .childBoard {
+            border: none;
+        }
+
+        .childBoard td {
+            border: none;
+            width: 40px;
+            height: 40px;
+            /* padding: 30px; */
+            border-radius: 100%;
+        }
+
+        .row {
+            margin-top: 10px;
+            border: solid black 1px;
+        }
+
+        .blue {
+            background: blue;
+        }
+
+        .green {
+            background: green;
+        }
+
+        .red {
+            background: red;
+        }
+
+        .yellow {
+            background: yellow;
+        }
+
+        .grey {
+            background: grey;
+        }
+        .players {
+            text-align: center;
+            font-size: 22px;
+            font-style: italic;
+        }
+        #middle {
+            color: white;
+            background: gray;
+            font-size: 100px;
+            text-align: center;
+        }
+        #middle:hover {
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 col-md-12">
+                <div class="col-lg-8 col-md-8">
+                    <table>
+                        <!-- Prvi red -->
+                        <tr class="motherBoard">
+                            <!-- Polje 1x1 -->
+                            <td>
+                                <table>
+                                    <tr class="childBoard-player">
+                                        <td class="blue"></td>
+                                        <td class="blue"></td>
+                                    </tr>
+                                    <tr class="childBoard-player">
+                                        <td class="blue"></td>
+                                        <td class="blue"></td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <!-- Polje 1x2 -->
+                            <td></td>
+                            <!-- Polje 1x3 -->
+                            <td>
+                                <table>
+                                    <tr class="childBoard">
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr class="childBoard">
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr class="childBoard">
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr class="childBoard">
+                                        <td></td>
+                                        <td></td>
+                                        <td class="grey"></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr class="childBoard">
+                                        <td class="grey"></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td class="green"></td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <!-- Polje 1x4 -->
+                            <td></td>
+                            <!-- Polje 1x5 -->
+                            <td>
+                                <table>
+                                    <tr class="childBoard-player">
+                                        <td class="green"></td>
+                                        <td class="green"></td>
+                                    </tr>
+                                    <tr class="childBoard-player">
+                                        <td class="green"></td>
+                                        <td class="green"></td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <!-- Drugi red -->
+                        <tr class="motherBoard">
+                            <!-- Polje 2x1 -->
+                            <td class="players" id="bluePlayer">BluePlayer</td>
+                            <!-- Polje 2x2 -->
+                            <td>
+                                <table>
+                                    <tr class="childBoard">
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td class="grey"></td>
+                                    </tr>
+                                    <tr class="childBoard">
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td class="grey"></td>
+                                    </tr>
+                                    <tr class="childBoard">
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td class="grey"></td>
+                                    </tr>
+                                    <tr class="childBoard">
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td class="grey"></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr class="childBoard">
+                                        <td class="grey"></td>
+                                        <td class="grey"></td>
+                                        <td class="grey"></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <!-- Polje 2x3 -->
+                            <td>
+                                <table>
+                                    <tr class="childBoard">
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr class="childBoard">
+                                        <td></td>
+                                        <td></td>
+                                        <td class="green"></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr class="childBoard">
+                                        <td></td>
+                                        <td></td>
+                                        <td class="green"></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr class="childBoard">
+                                        <td></td>
+                                        <td></td>
+                                        <td class="green"></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr class="childBoard">
+                                        <td></td>
+                                        <td></td>
+                                        <td class="green"></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <!-- Polje 2x4 -->
+                            <td>
+                                <table>
+                                    <tr class="childBoard">
+                                        <td class="grey"></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr class="childBoard">
+                                        <td class="grey"></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr class="childBoard">
+                                        <td class="grey"></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr class="childBoard">
+                                        <td></td>
+                                        <td class="grey"></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr class="childBoard">
+                                        <td></td>
+                                        <td></td>
+                                        <td class="grey"></td>
+                                        <td class="grey"></td>
+                                        <td class="grey"></td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <!-- Polje 2x5 -->
+                            <td class="players" id="greenPlayer">greenPlayer</td>
+                        </tr>
+                        <!-- Treci red -->
+                        <tr class="motherBoard">
+                            <!-- Polje 3x1 -->
+                            <td>
+                                <table>
+                                    <tr class="childBoard">
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td class="blue"></td>
+                                    </tr>
+                                    <tr class="childBoard">
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr class="childBoard">
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td class="grey"></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr class="childBoard">
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr class="childBoard">
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td class="grey"></td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <!-- Polje 3x2 -->
+                            <td>
+                                <table>
+                                    <tr class="childBoard">
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr class="childBoard">
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr class="childBoard">
+                                        <td></td>
+                                        <td class="blue"></td>
+                                        <td class="blue"></td>
+                                        <td class="blue"></td>
+                                        <td class="blue"></td>
+                                    </tr>
+                                    <tr class="childBoard">
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr class="childBoard">
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <!-- Polje 3x3 -->
+                            <td id="middle" class="loop"></td>
+                            <!-- Polje 3x4 -->
+                            <td>
+                                <table>
+                                    <tr class="childBoard">
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr class="childBoard">
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr class="childBoard">
+                                        <td class="yellow"></td>
+                                        <td class="yellow"></td>
+                                        <td class="yellow"></td>
+                                        <td class="yellow"></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr class="childBoard">
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr class="childBoard">
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <!-- Polje 3x5 -->
+                            <td>
+                                <table>
+                                    <tr class="childBoard">
+                                        <td class="grey"></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr class="childBoard">
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr class="childBoard">
+                                        <td></td>
+                                        <td class="grey"></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr class="childBoard">
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr class="childBoard">
+                                        <td class="yellow"></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <!-- Cetvrti red -->
+                        <tr class="motherBoard">
+                            <!-- Polje 4x1 -->
+                            <td class="players" id="redPlayer">redPlayer</td>
+                            <!-- Polje 4x2 -->
+                            <td>
+                                <table>
+                                    <tr class="childBoard">
+                                        <td class="grey"></td>
+                                        <td class="grey"></td>
+                                        <td class="grey"></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr class="childBoard">
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td class="grey"></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr class="childBoard">
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td class="grey"></td>
+                                    </tr>
+                                    <tr class="childBoard">
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td class="grey"></td>
+                                    </tr>
+                                    <tr class="childBoard">
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td class="grey"></td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <!-- Polje 4x3 -->
+                            <td>
+                                <table>
+                                    <tr class="childBoard">
+                                        <td></td>
+                                        <td></td>
+                                        <td class="red"></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr class="childBoard">
+                                        <td></td>
+                                        <td></td>
+                                        <td class="red"></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr class="childBoard">
+                                        <td></td>
+                                        <td></td>
+                                        <td class="red"></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr class="childBoard">
+                                        <td></td>
+                                        <td></td>
+                                        <td class="red"></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr class="childBoard">
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <!-- Polje 4x4 -->
+                            <td>
+                                <table>
+                                    <tr class="childBoard">
+                                        <td></td>
+                                        <td></td>
+                                        <td class="grey"></td>
+                                        <td class="grey"></td>
+                                        <td class="grey"></td>
+                                    </tr>
+                                    <tr class="childBoard">
+                                        <td></td>
+                                        <td class="grey"></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr class="childBoard">
+                                        <td class="grey"></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr class="childBoard">
+                                        <td class="grey"></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr class="childBoard">
+                                        <td class="grey"></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <!-- Polje 4x5 -->
+                            <td class="players" id="yellowPlayer">yellowPlayer</td>
+                        </tr>
+                        <!-- Peti red -->
+                        <tr class="motherBoard">
+                            <!-- Polje 5x1 -->
+                            <td>
+                                <table>
+                                    <tr class="childBoard-player">
+                                        <td class="red"></td>
+                                        <td class="red"></td>
+                                    </tr>
+                                    <tr class="childBoard-player">
+                                        <td class="red"></td>
+                                        <td class="red"></td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <!-- Polje 5x2 -->
+                            <td></td>
+                            <!-- Polje 5x3 -->
+                            <td>
+                                <table>
+                                    <tr class="childBoard">
+                                        <td class="red"></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td class="grey"></td>
+                                    </tr>
+                                    <tr class="childBoard">
+                                        <td></td>
+                                        <td></td>
+                                        <td class="grey"></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr class="childBoard">
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr class="childBoard">
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr class="childBoard">
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <!-- Polje 5x4 -->
+                            <td></td>
+                            <!-- Polje 5x5 -->
+                            <td>
+                                <table>
+                                    <tr class="childBoard-player">
+                                        <td class="yellow"></td>
+                                        <td class="yellow"></td>
+                                    </tr>
+                                    <tr class="childBoard-player">
+                                        <td class="yellow"></td>
+                                        <td class="yellow"></td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-lg-4 col-md-4">
+                    <button id="addPlayers">Add Players</button>
+                    <button id="start">Start Game</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <script src="gameplay.js"></script>
+</body>
+
+</html>
