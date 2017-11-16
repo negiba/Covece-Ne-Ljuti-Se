@@ -5,7 +5,9 @@ var players = [],
     onMove = ["red", "blue", "green", "yellow"],
     moved = false,
     cube = [1, 2, 3, 4, 5, 6],
-    cubeClicked = true;
+    cubeClicked = true,
+    firstTime = true,
+    turn = false; // nije jos iskoriscena
 
 // Funkcija za bacanje kockice, nema opciju vrtenja random brojeva vec samo izbacuje random broj
 // Ima opciju za ponovni klik ukoliko se dobije 6
@@ -41,6 +43,7 @@ function chooseColor() {
 }
 // Funkcija za dodavanje igraca
 // Ne radi najbolje, ako se izabere ista boja gazi prethodnog
+// Dodavati igrace u niz!
 // Treba popraviti!!!
 function addPlayers() {
     document.getElementById("addPlayers").addEventListener("click", function () {
@@ -62,18 +65,60 @@ function addPlayers() {
     });
 }
 
-function startGame() {
-    document.getElementById("start").addEventListener("click", function () {
-        gameStarted = true;
-        console.log(gameStarted);
-    });
-    
+// Promena igraca
+// Treba zavrsiti
+function changePlayer() {
 
 }
+
+// Pomeranje figura, izvrsiti na click
+// Treba zavrsiti
+function moveFigure() {
+    
+}
+
+//Provera da li je na polju na koje treba da stanemo vec neko,
+// ukoliko jeste vratiti ga u njegovu bazu
+// Treba zavrsiti
+function returnToBase() {
+    
+}
+
+//Provera da li je i poslednja figura usla u kucicu
+// ukoliko jeste, objava pobede
+// Treba zavrsiti
+function victoryMove() {
+    
+}
+
+// Pisanje rezultata
+// ime igraca i rezultat cuvamo u local storage
+// Treba zavrsiti
+function finalResult() {
+    
+}
+
+// Pocetak igre
+function startGame() {
+    document.getElementById("start").addEventListener("click", function () {
+        if (firstTime != true) {
+            gameStarted = true;
+            kocka();
+            console.log(gameStarted);
+        }
+        else {
+            document.getElementById("start").innerHTML = "Next Player";
+            cubeClicked = true;
+            kocka();
+        }
+    });
+
+
+}
+// Inicijalizacija igre
 function init() {
     addPlayers();
     startGame();
-
 }
 init();
 
