@@ -11,7 +11,7 @@ var players = [],
 
 // Boki uradila funkciju za bacanje kockice, sada ima opciju vrtenja random kockice
 // Sad treba srediti za ponovni klik ukoliko se dobije 6
-
+// bjhbjkbknknlk 
 function kocka() {
     document.getElementById("middle").addEventListener("click", function () {
         var randomNumber,
