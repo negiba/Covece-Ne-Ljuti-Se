@@ -10,7 +10,7 @@ var players = [],
     firstTime = true,
     turn = false; // nije jos iskoriscena
 
-// Boki uradila funkciju za bacanje kockice, sada ima opciju vrtenja random kockice
+// Boki uradila funkciju za bacanje kockice, sada ima opciju vrtenja random slikice kockice
 // Sad treba srediti za ponovni klik ukoliko se dobije 6
 function kocka() {
     console.log(whoPlays[move]);
@@ -22,7 +22,7 @@ function kocka() {
             var cubeClick = setInterval(function () {
                 randomNumber = cube[Math.floor(Math.random() * 6)];
                 images = "/slike/" + randomNumber + ".jpg",
-                document.getElementById("onMove" + whoPlays[move-1]).style.background = "url(" + images + ")";
+                    document.getElementById("onMove" + whoPlays[move - 1]).style.background = "url(" + images + ")";
                 counter++;
                 if (counter == 20) {
                     clearInterval(cubeClick);
@@ -82,32 +82,47 @@ function onMove() {
     } else {
         return whoPlays[move];
     }
-    console.log(move);
 }
 
 // Izvrsava postavljanje roll.jpg sto je oznaka da je igrac koji ima potrebnu boju, na potezu
 function changePlayer() {
     var i = onMove();
     // onMove vraca boju koju koristimo da pronadjemo potreban id
-    document.getElementById("onMove" + i).style.background = "url(/slike/roll.jpg)"; 
+    document.getElementById("onMove" + i).style.background = "url(/slike/roll.jpg)";
 }
 
 // Uz pomoc funkcije clearPlayer cistimo roll.jpg sa prethodnog igraca
 function clearPlayer() {
     var i = onMove();
-    // u slucaju da je boja crvena morali smo roll.jpg da ocistimo rucno jer je crvena boja na nultoj poziciji a zuta poslednja
-    if(i == "Red") {        
+    // poseban slucaj je kad je prethodni igrac žuti, trabalo bi whoPlays[move - 1] ali to jednako -1 a to nije žuti
+    // pa smo morali da mu rucno skinemo roll.jpg  -> "onMove" + "Yellow"
+    // za ostale boje to ne vazi
+    if (i == "Red") { 
         document.getElementById("onMove" + "Yellow").style.background = "";
     }
     else {
-        document.getElementById("onMove" + whoPlays[move-1]).style.background = "";
+        document.getElementById("onMove" + whoPlays[move - 1]).style.background = "";
     }
 }
-// Pomeranje figura, izvrsiti na click
-// Treba zavrsiti
+// Izvlaci sa slike kockice broj koji cemo koristiti za pomeranje figure
+function calculateMoves() {
+    var currentPlayer = whoPlays[move-1];
+    var moveCounter = document.getElementById("onMove" + currentPlayer).style.background;
+    var stringMoveCounter = moveCounter.substr(12, 1);
+    return stringMoveCounter;
+}
+
+// sa ovom f-jom "pomeramo" figuru tako sto farbamo odredjeni id sa odredjenom bojom
+// potrebne popravke
 function moveFigure() {
-    document.getElementById("");
-    // console.log(document.getElementById("middle").style.background);
+    var plays = onMove();
+    document.getElementById("path0").addEventListener("click", function () {
+        var figure = calculateMoves();
+
+        document.getElementById("path" + figure).style.background = plays;
+        console.log(plays);
+        console.log(figure);
+    });
 }
 
 //Provera da li je na polju na koje treba da stanemo vec neko,
@@ -144,19 +159,18 @@ function startGame() {
             cubeClicked = true;
             changePlayer();
             kocka();
-            clearPlayer();
             moveFigure();
+            clearPlayer();
             move++;
         }
     });
-
-
 }
 // Inicijalizacija igre
 function init() {
     addPlayers();
     startGame();
 }
+
 init();
 
 
