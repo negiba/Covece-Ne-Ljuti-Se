@@ -36,8 +36,7 @@
         .childBoard td {
             border: none;
             width: 40px;
-            height: 40px;
-            /* padding: 30px; */
+            height: 40px;        
             border-radius: 100%;
         }
 
@@ -70,11 +69,13 @@
             font-size: 22px;
             font-style: italic;
         }
-        #middle {
-            border: solid rgb(226, 226, 226) 1px;
+        .kockica {
+
+            border-radius: 0% !important;
+            border: solid rgb(228, 206, 206) 1px !important;
             background: white;                               
         }
-        #middle:hover {
+        .kockica:hover {
             cursor: pointer;
         }
     </style>
@@ -92,12 +93,12 @@
                             <td>
                                 <table>
                                     <tr class="childBoard-player">
-                                        <td class="blue">1</td>
-                                        <td class="blue">2</td>
+                                        <td class="blue" id="blue1">1</td>
+                                        <td class="blue" id="blue2">2</td>
                                     </tr>
                                     <tr class="childBoard-player">
-                                        <td class="blue">3</td>
-                                        <td class="blue">4</td>
+                                        <td class="blue" id="blue3">3</td>
+                                        <td class="blue" id="blue4">4</td>
                                     </tr>
                                 </table>
                             </td>
@@ -181,7 +182,7 @@
                                         <td class="grey"></td>
                                     </tr>
                                     <tr class="childBoard">
-                                        <td></td>
+                                        <td class="kockica" id="onMoveBlue"></td>
                                         <td></td>
                                         <td></td>
                                         <td></td>
@@ -265,7 +266,7 @@
                                         <td></td>
                                         <td></td>
                                         <td></td>
-                                        <td></td>
+                                        <td class="kockica" id="onMoveGreen"></td>
                                     </tr>
                                     <tr class="childBoard">
                                         <td></td>
@@ -473,7 +474,7 @@
                                         <td></td>
                                     </tr>
                                     <tr class="childBoard">
-                                        <td></td>
+                                        <td class="kockica" id="onMoveRed"></td>
                                         <td></td>
                                         <td></td>
                                         <td></td>
@@ -557,7 +558,7 @@
                                         <td></td>
                                         <td></td>
                                         <td></td>
-                                        <td></td>
+                                        <td class="kockica" id="onMoveYellow"></td>
                                     </tr>
                                     <tr class="childBoard">
                                         <td class="grey"></td>
@@ -654,7 +655,7 @@
                     </table>
                 </div>
                 <div class="col-lg-4 col-md-4">
-                    <button id="addPlayers">Add Players</button>
+                    <button id="newGame">New Game</button>
                     <button id="start">Start Game</button>
                 </div>
             </div>

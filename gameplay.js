@@ -2,7 +2,8 @@ var players = [],
     colors = ["red", "green", "blue", "yellow"],
     maxPlayers = 4,
     gameStarted = false,
-    onMove = ["red", "blue", "green", "yellow"],
+    move = 0,
+    whoPlays = ["Red", "Blue", "Green", "Yellow"],
     moved = false,
     cube = [1, 2, 3, 4, 5, 6],
     cubeClicked = true,
@@ -11,46 +12,28 @@ var players = [],
 
 // Boki uradila funkciju za bacanje kockice, sada ima opciju vrtenja random kockice
 // Sad treba srediti za ponovni klik ukoliko se dobije 6
-// bjhbjkbknknlk 
 function kocka() {
-    document.getElementById("middle").addEventListener("click", function () {
-        var randomNumber,
-        counter = 0;
+    console.log(whoPlays[move]);
+    document.getElementById("onMove" + whoPlays[move]).addEventListener("click", function () {
+        console.log(whoPlays[move]);
+        var counter = 0,
+            randomNumber;
         if (cubeClicked == true) {
             var cubeClick = setInterval(function () {
-                var randomNumber = cube[Math.floor(Math.random() * 6)];
-                var images = "/slike/" + randomNumber + ".png";
-                document.getElementById("middle").style.background = "url(" + images + ")";
+                randomNumber = cube[Math.floor(Math.random() * 6)];
+                images = "/slike/" + randomNumber + ".jpg",
+                document.getElementById("onMove" + whoPlays[move-1]).style.background = "url(" + images + ")";
                 counter++;
-            
-                if (counter == 10) {
+                if (counter == 20) {
                     clearInterval(cubeClick);
                 }
-            
-            }, 200);
-           
-            cubeClicked = false;
+                cubeClicked = false;
 
-            if (document.getElementById("middle").style.background == "url(" + "/slike/" + "6.png" + ")") {
-                var cubeClick = setInterval(function () {
-                    var randomNumber = cube[Math.floor(Math.random() * 6)];
-                    var images = "/slike/" + randomNumber + ".png";
-                    document.getElementById("middle").style.background = "url(" + images + ")" + "no-repeat";
-                    document.getElementById("middle").style.backgroundsize = "cover";
-                    counter++;
-    
-                    if (counter == 10) {
-                        clearInterval(cubeClick);
-                    }
-    
-                }, 200);
+            }, 100);
         }
-
-            cubeClicked = true;
-        }
-
     });
 }
+
 // Funkcija za biranje imena igraca
 function chooseName() {
     while (name == null || name == "") {
@@ -58,6 +41,7 @@ function chooseName() {
     }
     return name;
 }
+
 // Funkcija za biranje boje igraca
 function chooseColor() {
     while (color != "green" && color != "red" && color != "yellow" && color != "blue") {
@@ -65,14 +49,14 @@ function chooseColor() {
     }
     return color;
 }
+
 // Funkcija za dodavanje igraca
 // Ne radi najbolje, ako se izabere ista boja gazi prethodnog
 // Dodavati igrace u niz!
 // Treba popraviti!!!
 function addPlayers() {
-    document.getElementById("addPlayers").addEventListener("click", function () {
+    document.getElementById("newGame").addEventListener("click", function () {
         if (gameStarted == false) {
-            console.log(gameStarted);
             var newPlayer = {},
                 newGame = confirm("Zelite novog igraca?");
             if (newGame == true) {
@@ -82,6 +66,7 @@ function addPlayers() {
                 players = newPlayer;
                 console.log(name);
                 document.getElementById(newPlayer.color + "Player").innerHTML = newPlayer.name;
+                document.getElementById("newGame").innerHTML = "New Player";
 
             }
             console.log(players);
@@ -89,16 +74,40 @@ function addPlayers() {
     });
 }
 
-// Promena igraca
-// Treba zavrsiti
-function changePlayer() {
-
+// Vraca boju igraca koji je na potezu
+function onMove() {
+    if (move == 4) {
+        move = 0;
+        return whoPlays[move];
+    } else {
+        return whoPlays[move];
+    }
+    console.log(move);
 }
 
+// Izvrsava postavljanje roll.jpg sto je oznaka da je igrac koji ima potrebnu boju, na potezu
+function changePlayer() {
+    var i = onMove();
+    // onMove vraca boju koju koristimo da pronadjemo potreban id
+    document.getElementById("onMove" + i).style.background = "url(/slike/roll.jpg)"; 
+}
+
+// Uz pomoc funkcije clearPlayer cistimo roll.jpg sa prethodnog igraca
+function clearPlayer() {
+    var i = onMove();
+    // u slucaju da je boja crvena morali smo roll.jpg da ocistimo rucno jer je crvena boja na nultoj poziciji a zuta poslednja
+    if(i == "Red") {        
+        document.getElementById("onMove" + "Yellow").style.background = "";
+    }
+    else {
+        document.getElementById("onMove" + whoPlays[move-1]).style.background = "";
+    }
+}
 // Pomeranje figura, izvrsiti na click
 // Treba zavrsiti
 function moveFigure() {
-
+    document.getElementById("");
+    // console.log(document.getElementById("middle").style.background);
 }
 
 //Provera da li je na polju na koje treba da stanemo vec neko,
@@ -127,13 +136,17 @@ function startGame() {
     document.getElementById("start").addEventListener("click", function () {
         if (firstTime != true) {
             gameStarted = true;
+            changePlayer();
             kocka();
-            console.log(gameStarted);
         }
         else {
             document.getElementById("start").innerHTML = "Next Player";
             cubeClicked = true;
+            changePlayer();
             kocka();
+            clearPlayer();
+            moveFigure();
+            move++;
         }
     });
 
