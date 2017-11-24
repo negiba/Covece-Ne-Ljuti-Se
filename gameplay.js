@@ -1,37 +1,36 @@
 var players = [],
     colors = ["red", "green", "blue", "yellow"],
-    maxPlayers = 4,
+    numPlayers = 0,
     gameStarted = false,
     move = 0,
     whoPlays = ["Red", "Blue", "Green", "Yellow"],
     moved = false,
     cube = [1, 2, 3, 4, 5, 6],
-    cubeClicked = true,
+    cubeClicked = false,
     firstTime = true,
     turn = false; // nije jos iskoriscena
 
 // Boki uradila funkciju za bacanje kockice, sada ima opciju vrtenja random slikice kockice
+// Vrti koliko god puta kliknemo, srediti uslove
 // Sad treba srediti za ponovni klik ukoliko se dobije 6
 function kocka() {
-    console.log(whoPlays[move]);
-    document.getElementById("onMove" + whoPlays[move]).addEventListener("click", function () {
-        console.log(whoPlays[move]);
-        var counter = 0,
-            randomNumber;
-        if (cubeClicked == true) {
+    console.log(cubeClicked);
+    if (cubeClicked == false) {
+        document.getElementById("onMove" + whoPlays[move]).addEventListener("click", function () {
+            console.log(whoPlays[move]);
+            var counter = 0,
+                randomNumber;
             var cubeClick = setInterval(function () {
                 randomNumber = cube[Math.floor(Math.random() * 6)];
                 images = "/slike/" + randomNumber + ".jpg",
-                    document.getElementById("onMove" + whoPlays[move - 1]).style.background = "url(" + images + ")";
+                    document.getElementById("onMove" + whoPlays[move]).style.background = "url(" + images + ")";
                 counter++;
                 if (counter == 20) {
                     clearInterval(cubeClick);
                 }
-                cubeClicked = false;
-
-            }, 100);
-        }
-    });
+            }, 100);            
+        });
+    }
 }
 
 // Funkcija za biranje imena igraca
@@ -52,18 +51,23 @@ function chooseColor() {
 
 // Funkcija za dodavanje igraca
 // Ne radi najbolje, ako se izabere ista boja gazi prethodnog
-// Dodavati igrace u niz!
 // Treba popraviti!!!
 function addPlayers() {
-    document.getElementById("newGame").addEventListener("click", function () {
+    document.getElementById("newGame").addEventListener("click", function () {        
         if (gameStarted == false) {
             var newPlayer = {},
                 newGame = confirm("Zelite novog igraca?");
             if (newGame == true) {
                 newPlayer.name = chooseName();
                 console.log(name);
-                newPlayer.color = chooseColor();
-                players = newPlayer;
+                newPlayer.color = chooseColor();                
+                newPlayer.positions = {
+                    figure1: document.getElementById(newPlayer.color + 1),
+                    figure2: document.getElementById(newPlayer.color + 2),
+                    figure3: document.getElementById(newPlayer.color + 3),
+                    figure4: document.getElementById(newPlayer.color + 4),
+                };
+                players[numPlayers] = newPlayer;
                 console.log(name);
                 document.getElementById(newPlayer.color + "Player").innerHTML = newPlayer.name;
                 document.getElementById("newGame").innerHTML = "New Player";
@@ -71,6 +75,7 @@ function addPlayers() {
             }
             console.log(players);
         }
+        numPlayers++;
     });
 }
 
@@ -85,7 +90,7 @@ function onMove() {
 }
 
 // Izvrsava postavljanje roll.jpg sto je oznaka da je igrac koji ima potrebnu boju, na potezu
-function changePlayer() {
+function setPlayer() {
     var i = onMove();
     // onMove vraca boju koju koristimo da pronadjemo potreban id
     document.getElementById("onMove" + i).style.background = "url(/slike/roll.jpg)";
@@ -97,7 +102,7 @@ function clearPlayer() {
     // poseban slucaj je kad je prethodni igrac žuti, trabalo bi whoPlays[move - 1] ali to jednako -1 a to nije žuti
     // pa smo morali da mu rucno skinemo roll.jpg  -> "onMove" + "Yellow"
     // za ostale boje to ne vazi
-    if (i == "Red") { 
+    if (i == "Red") {
         document.getElementById("onMove" + "Yellow").style.background = "";
     }
     else {
@@ -106,7 +111,7 @@ function clearPlayer() {
 }
 // Izvlaci sa slike kockice broj koji cemo koristiti za pomeranje figure
 function calculateMoves() {
-    var currentPlayer = whoPlays[move-1];
+    var currentPlayer = whoPlays[move];
     var moveCounter = document.getElementById("onMove" + currentPlayer).style.background;
     var stringMoveCounter = moveCounter.substr(12, 1);
     return stringMoveCounter;
@@ -116,13 +121,13 @@ function calculateMoves() {
 // potrebne popravke
 function moveFigure() {
     var plays = onMove();
-    document.getElementById("path0").addEventListener("click", function () {
+    players[move].positions.figure1.addEventListener("click", function () {
         var figure = calculateMoves();
 
         document.getElementById("path" + figure).style.background = plays;
         console.log(plays);
         console.log(figure);
-    });
+    });    
 }
 
 //Provera da li je na polju na koje treba da stanemo vec neko,
@@ -146,23 +151,27 @@ function finalResult() {
 
 }
 
-// Pocetak igre
+// Kretanje igre
 function startGame() {
     document.getElementById("start").addEventListener("click", function () {
+        console.log(players[move].positions);        
+        gameStarted = true;
         if (firstTime != true) {
-            gameStarted = true;
-            changePlayer();
+            move++;
+            setPlayer();
             kocka();
+            moveFigure();       
+            clearPlayer();
         }
         else {
-            document.getElementById("start").innerHTML = "Next Player";
-            cubeClicked = true;
-            changePlayer();
+            document.getElementById("start").innerHTML = "Next Player";            
+            setPlayer();
             kocka();
+            console.log(cubeClicked);            
             moveFigure();
-            clearPlayer();
-            move++;
-        }
+            clearPlayer();            
+            firstTime = false;            
+        }        
     });
 }
 // Inicijalizacija igre
